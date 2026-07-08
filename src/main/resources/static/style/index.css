@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: '72 Condensed', sans-serif;
+}
+
+.container{
+    height: 100vh;
+}
+
+.title-row{
+    height: fit-content;
+    width: stretch;
+    text-align: center;
+}
+
+.title{
+    font-size: 60px
+}
+
