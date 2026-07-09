@@ -9,12 +9,16 @@ body{
 }
 
 .container{
+    display: flex;
+    flex-direction: column;
     height: 100vh;
+    gap: 1rem;
+
+    background-color: blueviolet;
 }
 
 .title-row{
-    height: fit-content;
-    width: stretch;
+    width: 100%;
     text-align: center;
 }
 
@@ -22,3 +26,31 @@ body{
     font-size: 60px
 }
 
+.user-button-container{
+    background-color: yellow;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: clamp(200px, 30vw, 400px);
+
+    height: 5%;
+}
+.user-button{
+    width: clamp(120px, 10vw, 250px);
+}
+
+.list-container{
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+
+    align-self: center;
+
+    width: clamp(200px, 40vw, 500px);
+
+    height: 80vh;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+}
