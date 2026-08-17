@@ -50,4 +50,4 @@ async function loadTasks(){
         taskList.appendChild(taskDiv);
     })
 }
-await loadTasks();
+loadTasks();
