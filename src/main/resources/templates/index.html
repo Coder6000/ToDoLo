@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>REST-Api</title>
     <link rel="stylesheet" th:href="@{/css/index.css}" href="../static/css/index.css">
+    <script defer src="../static/js/index.js" th:src="@{/js/index.js}"></script>
 </head>
 <body>
     <div class="container">
@@ -12,11 +13,15 @@
         </div>
 
         <div class="user-button-container">
-            <button class="user-button">Add</button>
+            <button id="addButton" class="user-button">Add</button>
             <button class="user-button">Remove</button>
         </div>
 
-        <div class="list-container">
+        <div class="input-row">
+            <input id="taskInput" class="taskInput" type="text" placeholder="Input your task here then click on add">
+        </div>
+
+        <div class="list-container" id="taskList">
 
         </div>
     </div>

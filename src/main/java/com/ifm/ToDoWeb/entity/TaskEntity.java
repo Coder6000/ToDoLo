@@ -23,7 +23,7 @@ public class TaskEntity {
         this.id = id;
     }
 
-    public String getTaskName() {
+    public String getTask() {
         return task;
     }
 

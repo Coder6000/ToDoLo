@@ -24,7 +24,7 @@ public class TaskService {
     }
 
     public TaskEntity createTask(TaskEntity task){
-        if(task.getTaskName().isBlank()){
+        if(task.getTask().isBlank()){
             throw new RuntimeException();
         }
         return taskRepository.save(task);

@@ -25,7 +25,7 @@ public class TaskController {
         return taskService.showTask(id);
     }
 
-    @PostMapping("/task")
+    @PostMapping("/tasks")
     public TaskEntity createTask(@RequestBody TaskEntity task){
         return taskService.createTask(task);
     }
