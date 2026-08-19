@@ -21,9 +21,9 @@ async function addTask() {
         }),
     });
     taskInput.value = "";
-    await loadTasks();
+    await loadTasksToList();
 }
-async function loadTasks(){
+async function getTasks(){
     const response = await fetch("/tasks");
 
     if(!response.ok){
@@ -32,6 +32,12 @@ async function loadTasks(){
     }
 
     const tasks = await response.json();
+    return tasks;
+}
+
+async function loadTasksToList(){
+    const tasks = await getTasks();
+
     taskList.innerHTML = "";
 
     tasks.forEach((task) => {
@@ -50,4 +56,5 @@ async function loadTasks(){
         taskList.appendChild(taskDiv);
     })
 }
-loadTasks();
+
+loadTasksToList();
