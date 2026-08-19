@@ -44,7 +44,7 @@ async function loadTasksToList(){
         const taskDiv = document.createElement("div");
         const taskCheckButton = document.createElement("input")
         const taskLabel = document.createElement("label");
-        taskCheckButton.type = "radio";
+        taskCheckButton.type = "checkbox";
         taskCheckButton.value = task.task;
         taskCheckButton.id = task.id;
 
