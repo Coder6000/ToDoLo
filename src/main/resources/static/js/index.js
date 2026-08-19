@@ -1,8 +1,12 @@
 const taskInput = document.getElementById("taskInput");
 const taskList = document.getElementById("taskList");
 const addButton = document.getElementById("addButton");
+const removeButton = document.getElementById("removeButton");
+
+let selectedTaskId = null;
 
 addButton.addEventListener("click", addTask);
+removeButton.addEventListener("click", removeTask);
 
 async function addTask() {
     const task = taskInput.value.trim();
@@ -53,8 +57,22 @@ async function loadTasksToList(){
 
         taskDiv.appendChild(taskCheckButton);
         taskDiv.appendChild(taskLabel);
+
+        taskDiv.addEventListener("dblclick", function () {
+            selectedTaskId = task.id;
+        })
+
         taskList.appendChild(taskDiv);
     })
+}
+
+async function removeTask(){
+    await fetch("/tasks/" + selectedTaskId, {
+        method: "DELETE"
+    })
+    selectedTaskId = null;
+
+    await loadTasksToList();
 }
 
 loadTasksToList();
