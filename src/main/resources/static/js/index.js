@@ -1,3 +1,7 @@
+import {TaskApi} from "./TaskApi.js"
+
+const taskApi = new TaskApi();
+
 const taskInput = document.getElementById("taskInput");
 const taskList = document.getElementById("taskList");
 const addButton = document.getElementById("addButton");
@@ -15,32 +19,15 @@ async function addTask() {
         alert("Please enter task name");
         return;
     }
-    await fetch("/tasks", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            task: task
-        }),
-    });
+
+    await taskApi.createTask(task);
+
     taskInput.value = "";
     await loadTasksToList();
 }
-async function getTasks(){
-    const response = await fetch("/tasks");
-
-    if(!response.ok){
-        alert("Could not load tasks!");
-        return;
-    }
-
-    const tasks = await response.json();
-    return tasks;
-}
 
 async function loadTasksToList(){
-    const tasks = await getTasks();
+    const tasks = await taskApi.getTasks();
 
     taskList.innerHTML = "";
 
@@ -67,9 +54,7 @@ async function loadTasksToList(){
 }
 
 async function removeTask(){
-    await fetch("/tasks/" + selectedTaskId, {
-        method: "DELETE"
-    })
+    await taskApi.deleteTask(selectedTaskId);
     selectedTaskId = null;
 
     await loadTasksToList();

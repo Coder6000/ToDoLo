@@ -12,8 +12,7 @@ and then run it using your preferred IDE or by executing ./mvnw spring-boot:run 
 
 ## Features
 
-Currently, you can only add tasks in the list, in the future you'll be able to mark the Task as
-done or remove it from the list.
+You can add tasks to the list, mark them as done and remove them from the list.
 
 ## Goals
 
