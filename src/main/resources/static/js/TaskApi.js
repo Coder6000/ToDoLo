@@ -7,8 +7,7 @@ export class TaskApi {
             return;
         }
 
-        const tasks = await response.json();
-        return tasks;
+        return await response.json();
     }
     async createTask(task){
         await fetch("/tasks", {
