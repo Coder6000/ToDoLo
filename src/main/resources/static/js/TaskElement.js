@@ -10,18 +10,19 @@ export class TaskElement {
     }
 
     createTaskCheckButton(task){
-        this.taskCheckButton = document.createElement("button");
+        this.taskCheckButton = document.createElement("input");
 
         this.taskCheckButton.type = "checkbox";
         this.taskCheckButton.value = task.task;
         this.taskCheckButton.id = task.id;
+        this.taskCheckButton.classList.add("task-checkbox");
     }
 
     createTaskLabel(task){
         this.taskLabel = document.createElement("label");
 
         this.taskLabel.textContent = task.task;
-        this.taskLabel.type = "label";
+        this.taskLabel.htmlFor = task.id;
     }
 
     createTaskDiv(){
