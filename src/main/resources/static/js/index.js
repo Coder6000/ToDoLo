@@ -1,4 +1,5 @@
 import {TaskApi} from "./TaskApi.js"
+import {TaskElement} from "./TaskElement.js"
 
 const taskApi = new TaskApi();
 
@@ -32,29 +33,32 @@ async function loadTasksToList(){
     taskList.innerHTML = "";
 
     tasks.forEach((task) => {
-        const taskDiv = document.createElement("div");
-        const taskCheckButton = document.createElement("input")
-        const taskLabel = document.createElement("label");
-        taskCheckButton.type = "checkbox";
-        taskCheckButton.value = task.task;
-        taskCheckButton.id = task.id;
-
-        taskLabel.textContent = task.task;
-        taskLabel.htmlFor = task.id;
-
-        taskDiv.appendChild(taskCheckButton);
-        taskDiv.appendChild(taskLabel);
-
-        taskDiv.addEventListener("dblclick", function () {
-            selectedTaskId = task.id;
-        })
+        const taskDiv = createTaskElement(task);
 
         taskList.appendChild(taskDiv);
     })
 }
 
+function createTaskElement(task) {
+    const taskElement = new TaskElement();
+
+    taskElement.createTaskElement(task);
+
+    taskElement.taskDiv.addEventListener("dblclick", function () {
+        selectedTaskId = task.id;
+    })
+
+    return taskElement.taskDiv;
+}
+
 async function removeTask(){
+    if(selectedTaskId === null) {
+        alert("Please select a task by double clicking to remove");
+        return;
+    }
+
     await taskApi.deleteTask(selectedTaskId);
+
     selectedTaskId = null;
 
     await loadTasksToList();
