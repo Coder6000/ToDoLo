@@ -76,6 +76,7 @@
     background-color: #646161;
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 
     align-self: center;
 
@@ -88,6 +89,13 @@
     overflow-y: auto;
     overflow-x: hidden;
     overflow-wrap: break-word;
+}
+
+.task-element-container{
+    display: flex;
+    flex-direction: row;
+
+    gap: 0.2rem;
 }
 
 .task-checkbox{
