@@ -44,9 +44,20 @@ function createTaskElement(task) {
 
     taskElement.createTaskElement(task);
 
-    taskElement.taskDiv.addEventListener("dblclick", function () {
-        selectedTaskId = task.id;
+    if(selectedTaskId === task.id){
+        taskElement.taskDiv.classList.add("selected-task");
+    }
+
+    taskElement.taskDiv.addEventListener("dblclick", async function () {
+        if(selectedTaskId === null){
+            selectedTaskId = task.id;
+        }
+
+        else selectedTaskId = null;
+
+        await loadTasksToList();
     })
+
 
     return taskElement.taskDiv;
 }

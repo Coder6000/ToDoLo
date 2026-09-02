@@ -106,4 +106,9 @@
     font-family: 'Goudy Old Style';
     font-weight: bold;
     font-size: clamp(1rem, 3rem, 1.5rem);
+    user-select: none;
+}
+
+.selected-task{
+    background-color: #3f3d3d;
 }
