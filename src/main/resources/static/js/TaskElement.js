@@ -22,7 +22,8 @@ export class TaskElement {
         this.taskLabel = document.createElement("label");
 
         this.taskLabel.textContent = task.task;
-        this.taskLabel.htmlFor = task.id;
+        this.taskLabel.id = task.id;
+        this.taskLabel.classList.add("task-label");
     }
 
     createTaskDiv(){
@@ -30,5 +31,6 @@ export class TaskElement {
 
         this.taskDiv.append(this.taskCheckButton);
         this.taskDiv.append(this.taskLabel);
+        this.taskDiv.classList.add("task-element-container");
     }
 }
