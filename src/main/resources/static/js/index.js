@@ -49,17 +49,20 @@ function createTaskElement(task) {
     }
 
     taskElement.taskDiv.addEventListener("dblclick", async function () {
-        if(selectedTaskId === null){
-            selectedTaskId = task.id;
-        }
-
-        else selectedTaskId = null;
-
-        await loadTasksToList();
+       await selectTask(task.id);
     })
 
 
     return taskElement.taskDiv;
+}
+
+async function selectTask(taskId){
+    if(selectedTaskId === null){
+        selectedTaskId = taskId;
+    }
+    else selectedTaskId = null;
+
+    await loadTasksToList();
 }
 
 async function removeTask(){
@@ -74,5 +77,7 @@ async function removeTask(){
 
     await loadTasksToList();
 }
+
+
 
 loadTasksToList();
