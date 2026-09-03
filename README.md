@@ -7,7 +7,7 @@ the backend architecture pattern is Entity -> Service -> Controller -> Repositor
 
 ## How to run:
 
-To run this app locally, you simply clone it using git clone https://gitlab.dev.ifm/group-services/azubis-essen/todo-springboot.git
+To run this app locally, you simply clone it 
 and then run it using your preferred IDE or by executing ./mvnw spring-boot:run in the project directory.
 
 ## Features
