@@ -78,6 +78,4 @@ async function removeTask(){
     await loadTasksToList();
 }
 
-
-
 loadTasksToList();
