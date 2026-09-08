@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>REST-Api</title>
     <link rel="stylesheet" th:href="@{/css/index.css}" href="../static/css/index.css">
-    <script defer src="../static/js/index.js" th:src="@{/js/index.js}"></script>
+    <script type="module" th:type="module" defer src="../static/js/index.js" th:src="@{/js/index.js}"></script>
 </head>
 <body>
     <div class="container">
@@ -14,7 +14,7 @@
 
         <div class="user-button-container">
             <button id="addButton" class="user-button">Add</button>
-            <button class="user-button">Remove</button>
+            <button id="removeButton" class="user-button">Remove</button>
         </div>
 
         <div class="input-row">

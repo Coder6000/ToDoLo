@@ -1,8 +1,17 @@
+import {TaskApi} from "./TaskApi.js"
+import {TaskElement} from "./TaskElement.js"
+
+const taskApi = new TaskApi();
+
 const taskInput = document.getElementById("taskInput");
 const taskList = document.getElementById("taskList");
 const addButton = document.getElementById("addButton");
+const removeButton = document.getElementById("removeButton");
+
+let selectedTaskId = null;
 
 addButton.addEventListener("click", addTask);
+removeButton.addEventListener("click", removeTask);
 
 async function addTask() {
     const task = taskInput.value.trim();
@@ -11,43 +20,62 @@ async function addTask() {
         alert("Please enter task name");
         return;
     }
-    await fetch("/tasks", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            task: task
-        }),
-    });
+
+    await taskApi.createTask(task);
+
     taskInput.value = "";
-    await loadTasks();
+    await loadTasksToList();
 }
-async function loadTasks(){
-    const response = await fetch("/tasks");
 
-    if(!response.ok){
-        alert("Could not load tasks!");
-        return;
-    }
+async function loadTasksToList(){
+    const tasks = await taskApi.getTasks();
 
-    const tasks = await response.json();
     taskList.innerHTML = "";
 
     tasks.forEach((task) => {
-        const taskDiv = document.createElement("div");
-        const taskCheckButton = document.createElement("input")
-        const taskLabel = document.createElement("label");
-        taskCheckButton.type = "radio";
-        taskCheckButton.value = task.task;
-        taskCheckButton.id = task.id;
+        const taskDiv = createTaskElement(task);
 
-        taskLabel.textContent = task.task;
-        taskLabel.htmlFor = task.id;
-
-        taskDiv.appendChild(taskCheckButton);
-        taskDiv.appendChild(taskLabel);
         taskList.appendChild(taskDiv);
     })
 }
-loadTasks();
+
+function createTaskElement(task) {
+    const taskElement = new TaskElement();
+
+    taskElement.createTaskElement(task);
+
+    if(selectedTaskId === task.id){
+        taskElement.taskDiv.classList.add("selected-task");
+    }
+
+    taskElement.taskDiv.addEventListener("dblclick", async function () {
+       await selectTask(task.id);
+    })
+
+
+    return taskElement.taskDiv;
+}
+
+async function selectTask(taskId){
+    if(selectedTaskId === null){
+        selectedTaskId = taskId;
+    }
+    else selectedTaskId = null;
+
+    await loadTasksToList();
+}
+
+async function removeTask(){
+    if(selectedTaskId === null) {
+        alert("Please select a task by double clicking to remove");
+        return;
+    }
+
+    await taskApi.deleteTask(selectedTaskId);
+
+    selectedTaskId = null;
+
+    await loadTasksToList();
+}
+
+loadTasksToList();
