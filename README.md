@@ -3,12 +3,11 @@
 ## Description
 
 this is a ToDo Web Application built with Spring Boot using Thymeleaf and basic HTML, CSS and JavaScript
-
 the backend architecture pattern is Entity -> Service -> Controller -> Repository.
 
 ## How to run:
 
-To run this app locally, you simply clone the git repo
+To run this app locally, you simply clone it 
 and then run it using your preferred IDE or by executing ./mvnw spring-boot:run in the project directory.
 
 ## Features
