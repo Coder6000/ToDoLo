@@ -2,8 +2,9 @@
 
 ## Description
 
-this is a ToDo Web Application built with Spring Boot using Thymeleaf and basic HTML, CSS and JavaScript
-the backend architecture pattern is Entity -> Service -> Controller -> Repository.
+this is a ToDo Web Application built with Spring Boot using Thymeleaf and basic HTML, CSS and JavaScript.
+
+It follows the following pattern: Controller -> Service -> Repository with DTOs and Entities.
 
 ## How to run:
 
@@ -17,4 +18,4 @@ You can add tasks to the list, mark them as done and remove them from the list.
 ## Goals
 
 The goal of this project was for me to learn how to code a basic REST API using Spring Boot and then connecting the backend with the front end
-and make both work together. I learnt what async, await does and how the fetch api works.
+and make both work together. I learnt what async, await does and how the fetch api works. I also learned the concept of DTOs.
