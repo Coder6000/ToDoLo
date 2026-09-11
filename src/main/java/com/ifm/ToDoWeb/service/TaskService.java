@@ -42,6 +42,10 @@ public class TaskService {
         taskRepository.deleteById(taskID);
     }
 
+    public void deleteAllTasks(){
+        taskRepository.deleteAll();
+    }
+
     private TaskDTO entityToDTO(TaskEntity task){
         return new TaskDTO(task.getId(),  task.getTask());
     }
