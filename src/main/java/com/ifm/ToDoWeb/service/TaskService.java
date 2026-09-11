@@ -1,5 +1,6 @@
 package com.ifm.ToDoWeb.service;
 
+import com.ifm.ToDoWeb.dto.TaskDTO;
 import com.ifm.ToDoWeb.entity.TaskEntity;
 import com.ifm.ToDoWeb.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -15,22 +16,33 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<TaskEntity> showAllTasks(){
-        return taskRepository.findAll();
+    public List<TaskDTO> showAllTasks(){
+        return taskRepository.findAll().stream().map(this::entityToDTO).toList();
     }
 
-    public Optional<TaskEntity> showTask(Long taskID){
-        return taskRepository.findById(taskID);
+     
+    public TaskDTO showTask(Long taskID){
+        TaskEntity taskEntity = taskRepository.findById(taskID).orElse(null);
+        return new TaskDTO(taskEntity.getId(), taskEntity.getTask());
     }
 
-    public TaskEntity createTask(TaskEntity task){
+    public TaskDTO createTask(TaskDTO task){
+        TaskEntity taskEntity = new TaskEntity();
+
+        taskEntity.setTask(task.getTask());
+
         if(task.getTask().isBlank()){
             throw new RuntimeException();
         }
-        return taskRepository.save(task);
+        TaskEntity newTask = taskRepository.save(taskEntity);
+        return entityToDTO(newTask);
     }
 
     public void deleteTask(Long taskID){
         taskRepository.deleteById(taskID);
+    }
+
+    private TaskDTO entityToDTO(TaskEntity task){
+        return new TaskDTO(task.getId(),  task.getTask());
     }
 }
