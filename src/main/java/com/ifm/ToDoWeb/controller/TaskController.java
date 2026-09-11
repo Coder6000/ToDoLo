@@ -1,11 +1,10 @@
 package com.ifm.ToDoWeb.controller;
 
-import com.ifm.ToDoWeb.entity.TaskEntity;
+import com.ifm.ToDoWeb.dto.TaskDTO;
 import com.ifm.ToDoWeb.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class TaskController {
@@ -16,17 +15,17 @@ public class TaskController {
     }
 
     @GetMapping("/tasks")
-    public List<TaskEntity> getTasks(){
+    public List<TaskDTO> getTasks(){
         return taskService.showAllTasks();
     }
 
     @GetMapping("/tasks/{id}")
-    public Optional<TaskEntity> getTaskById(@PathVariable Long id){
+    public TaskDTO getTaskById(@PathVariable Long id){
         return taskService.showTask(id);
     }
 
     @PostMapping("/tasks")
-    public TaskEntity createTask(@RequestBody TaskEntity task){
+    public TaskDTO createTask(@RequestBody TaskDTO task){
         return taskService.createTask(task);
     }
 
