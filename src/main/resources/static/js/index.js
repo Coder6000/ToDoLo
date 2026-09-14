@@ -7,11 +7,13 @@ const taskInput = document.getElementById("taskInput");
 const taskList = document.getElementById("taskList");
 const addButton = document.getElementById("addButton");
 const removeButton = document.getElementById("removeButton");
+const clearButton = document.getElementById("clearButton");
 
 let selectedTaskId = null;
 
 addButton.addEventListener("click", addTask);
 removeButton.addEventListener("click", removeTask);
+clearButton.addEventListener("click", clearTasks);
 
 async function addTask() {
     const task = taskInput.value.trim();
@@ -72,6 +74,14 @@ async function removeTask(){
     }
 
     await taskApi.deleteTask(selectedTaskId);
+
+    selectedTaskId = null;
+
+    await loadTasksToList();
+}
+
+async function clearTasks(){
+    await taskApi.deleteAllTasks();
 
     selectedTaskId = null;
 

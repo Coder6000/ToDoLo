@@ -26,4 +26,10 @@ export class TaskApi {
             method: "DELETE",
         });
     }
+
+    async deleteAllTasks(){
+        await fetch("/tasks/all", {
+            method: "DELETE",
+        });
+    }
 }
