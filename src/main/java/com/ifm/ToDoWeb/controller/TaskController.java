@@ -1,6 +1,7 @@
 package com.ifm.ToDoWeb.controller;
 
-import com.ifm.ToDoWeb.dto.TaskDTO;
+import com.ifm.ToDoWeb.dto.TaskRequestDTO;
+import com.ifm.ToDoWeb.dto.TaskResponseDTO;
 import com.ifm.ToDoWeb.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,18 +16,18 @@ public class TaskController {
     }
 
     @GetMapping("/tasks")
-    public List<TaskDTO> getTasks(){
+    public List<TaskResponseDTO> getTasks(){
         return taskService.showAllTasks();
     }
 
     @GetMapping("/tasks/{id}")
-    public TaskDTO getTaskById(@PathVariable Long id){
+    public TaskResponseDTO getTaskById(@PathVariable Long id){
         return taskService.showTask(id);
     }
 
     @PostMapping("/tasks")
-    public TaskDTO createTask(@RequestBody TaskDTO task){
-        return taskService.createTask(task);
+    public TaskResponseDTO createTask(@RequestBody TaskRequestDTO request){
+        return taskService.createTask(request);
     }
 
     @DeleteMapping("/tasks/{id}")

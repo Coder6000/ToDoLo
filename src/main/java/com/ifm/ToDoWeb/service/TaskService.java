@@ -1,12 +1,12 @@
 package com.ifm.ToDoWeb.service;
 
-import com.ifm.ToDoWeb.dto.TaskDTO;
+import com.ifm.ToDoWeb.dto.TaskRequestDTO;
+import com.ifm.ToDoWeb.dto.TaskResponseDTO;
 import com.ifm.ToDoWeb.entity.TaskEntity;
 import com.ifm.ToDoWeb.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -16,24 +16,25 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<TaskDTO> showAllTasks(){
+    public List<TaskResponseDTO> showAllTasks(){
         return taskRepository.findAll().stream().map(this::entityToDTO).toList();
     }
 
      
-    public TaskDTO showTask(Long taskID){
+    public TaskResponseDTO showTask(Long taskID){
         TaskEntity taskEntity = taskRepository.findById(taskID).orElse(null);
-        return new TaskDTO(taskEntity.getId(), taskEntity.getTask());
+        return new TaskResponseDTO(taskEntity.getId(), taskEntity.getTask());
     }
 
-    public TaskDTO createTask(TaskDTO task){
+    public TaskResponseDTO createTask(TaskRequestDTO request){
         TaskEntity taskEntity = new TaskEntity();
 
-        taskEntity.setTask(task.getTask());
-
-        if(task.getTask().isBlank()){
+        if(request.getTask().isBlank()){
             throw new RuntimeException();
         }
+
+        taskEntity.setTask(request.getTask());
+
         TaskEntity newTask = taskRepository.save(taskEntity);
         return entityToDTO(newTask);
     }
@@ -46,7 +47,7 @@ public class TaskService {
         taskRepository.deleteAll();
     }
 
-    private TaskDTO entityToDTO(TaskEntity task){
-        return new TaskDTO(task.getId(),  task.getTask());
+    private TaskResponseDTO entityToDTO(TaskEntity task){
+        return new TaskResponseDTO(task.getId(),  task.getTask());
     }
 }
